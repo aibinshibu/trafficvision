@@ -1,0 +1,18 @@
+# TrafficVision AI - Unified Production Requirements for Render
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pydantic-settings
+passlib[bcrypt]
+python-jose[cryptography]
+psycopg[binary]
+httpx
+pytest
+python-dotenv
+email-validator
+redis
+joblib
+scikit-learn
+pandas
+numpy

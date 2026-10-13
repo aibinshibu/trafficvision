@@ -1,0 +1,33 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Node & Next.js
+node_modules/
+.next/
+out/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Databases & logs
+*.db
+*.sqlite3
+*.log
+frontend.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

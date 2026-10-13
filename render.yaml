@@ -1,0 +1,51 @@
+# TrafficVision AI — Render Blueprint Deployment Specification
+# Deploys Backend API Gateway + Internal Microservices, PostgreSQL Database, and Next.js Frontend.
+
+services:
+  # ============================================================
+  # 1. API GATEWAY & BACKEND MICROSERVICES
+  # ============================================================
+  - type: web
+    name: trafficvision-backend
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start_render.sh
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trafficvision-db
+          property: connectionString
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+  # ============================================================
+  # 2. HARIOM'S NEXT.JS FRONTEND
+  # ============================================================
+  - type: web
+    name: trafficvision-frontend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: hariom-frontend/frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_API_URL
+        value: https://trafficvision-backend.onrender.com/api/v1
+
+databases:
+  # ============================================================
+  # 3. POSTGRESQL DATABASE (FREE TIER)
+  # ============================================================
+  - name: trafficvision-db
+    databaseName: trafficvision
+    user: trafficvision_user
+    plan: free
+    region: oregon
