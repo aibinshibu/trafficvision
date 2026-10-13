@@ -25,9 +25,14 @@ out/
 *.sqlite3
 *.log
 frontend.log
+*.rdb
+
+# Testing
+.pytest_cache/
 
 # IDE & OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+
